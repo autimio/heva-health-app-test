@@ -4,12 +4,9 @@
 
 Live: https://heva-health-app-test.vercel.app
 
-Two-page React app demonstrating a simple counter/clock and an OpenFDA data browser with live search and a skeleton loader.
-
-- Counter + Clock: numeric counter with configurable step (±) and a running digital clock (1s tick, no external libraries).
-- OpenFDA Data: fetches Food Enforcement recalls and displays a filterable table with live search (debounced), server-side filtering, skeleton loading, and horizontal scroll for smaller screens.
-
-Source API: https://open.fda.gov/apis/
+Two screens:
+- Counter + Clock: configurable step (±) + ticking clock.
+- OpenFDA Data: searchable table (classification filter + skeleton). Data: https://open.fda.gov/apis/
 
 ## Tech Stack
 
@@ -19,31 +16,15 @@ Source API: https://open.fda.gov/apis/
 - ESLint (TypeScript config)
 
 ## Requirements
-
-- Node.js 18+ (Node 20+ recommended)
-- npm
-- Internet access (client fetches OpenFDA directly)
+- Node 18+ (20+ recommended), npm, internet access
 
 ## Getting Started
 
-1. Install dependencies
-
 ```
 npm install
-```
-
-2. Run the app
-
-```
 npm run dev
 ```
-
-3. Navigate using the header tabs
-
-- Counter + Clock → counter with step input and live clock
-- OpenFDA Data → table with text/classification filters
-
-Hash-based routing is used so the app works on static hosting (e.g., GitHub Pages) without server rewrites.
+Hash routing is used, so it works on static hosting.
 
 ## Available Scripts
 
@@ -57,45 +38,11 @@ Hash-based routing is used so the app works on static hosting (e.g., GitHub Page
 - `npm run cy:run`: run Cypress headless
 
 ## Tests
+- Unit: Vitest + Testing Library (happy-dom). Run `npm run test` or `npm run test:ui`.
+- E2E: Cypress. Run `npm run cy:open` or `npm run cy:run` (stubs FDA API with `cy.intercept`).
+- CI: GitHub Actions runs both on push/PR (`.github/workflows/ci.yml`).
 
-### Unit Tests (Vitest + Testing Library)
-
-- Runner: Vitest with `happy-dom` environment for speed and `@testing-library/react` for queries.
-- Setup: `src/test/setup.ts` loads `@testing-library/jest-dom` matchers.
-- Location: tests live under `src/__tests__/**`.
-- How to run:
-  - Headless: `npm run test`
-  - Watch/UI: `npm run test:ui`
-- Notes:
-  - Debounce is disabled in tests for FDA page (`debounceMs = 0` when `MODE === 'test'`) to keep tests fast/stable.
-  - Prefer accessible queries (role/label/placeholder); a few `data-testid`/`data-cy` hooks exist for counter elements.
-
-### E2E Tests (Cypress)
-
-Prerequisites:
-
-- Start the dev server in another terminal: `npm run dev`
-
-Run tests:
-
-- Open interactive runner: `npm run cy:open`
-- Headless: `npm run cy:run`
-
-Notes:
-
-- Specs in `cypress/e2e/*.cy.js` (JavaScript to avoid TS bundling issues in Cypress).
-- Base URL: `http://localhost:5173` (`cypress.config.js`).
-- FDA requests are stubbed via `cy.intercept` to avoid external network dependency.
-- Stable selectors: `data-cy` on counter (buttons/value/input), `aria-label="Classification"` on the select.
-
-### Continuous Integration (GitHub Actions)
-
-- Workflow: `.github/workflows/ci.yml`
-- Jobs:
-  - Unit (Vitest): installs deps and runs `npm run test`.
-  - E2E (Cypress): starts Vite dev server and runs Cypress headless (Chrome). Uploads screenshots/videos on failure.
-
-## Project Structure
+## Structure
 
 ```
 src/
@@ -110,13 +57,8 @@ src/
   types/          # openfda API types
 ```
 
-## Implementation Notes
-
-- Atomic Design: UI is composed from atoms → molecules → organisms → templates → pages. Reference: https://atomicdesign.bradfrost.com/chapter-2/
-- Accessibility: high-contrast text, focus rings, keyboard-friendly nav, sticky header; table header stays visible.
-- FDA search: input triggers API queries with 450ms debounce; previous requests are aborted. Quotes in search terms are escaped.
-- Skeletons: while loading, a table-shaped skeleton is shown (no spinners).
-- Table: fixed min-width with horizontal scrolling; long text wraps where appropriate.
+## Notes
+- Atomic Design (atoms → molecules → organisms → templates → pages). Ref: https://atomicdesign.bradfrost.com/chapter-2/
 
 ## API Details
 
