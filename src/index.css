@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Utility: tabular numeric figures for clocks/counters */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
