@@ -1,5 +1,7 @@
 # Heva Health App Test
 
+[![CI](https://github.com/autimio/heva-health-app-test/actions/workflows/ci.yml/badge.svg)](https://github.com/autimio/heva-health-app-test/actions/workflows/ci.yml)
+
 Two-page React app demonstrating a simple counter/clock and an OpenFDA data browser with live search and a skeleton loader.
 
 - Counter + Clock: numeric counter with configurable step (±) and a running digital clock (1s tick, no external libraries).
