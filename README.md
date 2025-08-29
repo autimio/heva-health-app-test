@@ -56,6 +56,45 @@ Hash-based routing is used so the app works on static hosting (e.g., GitHub Page
 - `npm run cy:open`: open Cypress runner
 - `npm run cy:run`: run Cypress headless
 
+## Tests
+
+### Unit Tests (Vitest + Testing Library)
+
+- Runner: Vitest with `happy-dom` environment for speed and `@testing-library/react` for queries.
+- Setup: `src/test/setup.ts` loads `@testing-library/jest-dom` matchers.
+- Location: tests live under `src/__tests__/**`.
+- How to run:
+  - Headless: `npm run test`
+  - Watch/UI: `npm run test:ui`
+- Notes:
+  - Debounce is disabled in tests for FDA page (`debounceMs = 0` when `MODE === 'test'`) to keep tests fast/stable.
+  - Prefer accessible queries (role/label/placeholder); a few `data-testid`/`data-cy` hooks exist for counter elements.
+
+### E2E Tests (Cypress)
+
+Prerequisites:
+
+- Start the dev server in another terminal: `npm run dev`
+
+Run tests:
+
+- Open interactive runner: `npm run cy:open`
+- Headless: `npm run cy:run`
+
+Notes:
+
+- Specs in `cypress/e2e/*.cy.js` (JavaScript to avoid TS bundling issues in Cypress).
+- Base URL: `http://localhost:5173` (`cypress.config.js`).
+- FDA requests are stubbed via `cy.intercept` to avoid external network dependency.
+- Stable selectors: `data-cy` on counter (buttons/value/input), `aria-label="Classification"` on the select.
+
+### Continuous Integration (GitHub Actions)
+
+- Workflow: `.github/workflows/ci.yml`
+- Jobs:
+  - Unit (Vitest): installs deps and runs `npm run test`.
+  - E2E (Cypress): starts Vite dev server and runs Cypress headless (Chrome). Uploads screenshots/videos on failure.
+
 ## Project Structure
 
 ```
@@ -78,21 +117,6 @@ src/
 - FDA search: input triggers API queries with 450ms debounce; previous requests are aborted. Quotes in search terms are escaped.
 - Skeletons: while loading, a table-shaped skeleton is shown (no spinners).
 - Table: fixed min-width with horizontal scrolling; long text wraps where appropriate.
-
-## E2E Tests (Cypress)
-
-Prerequisites:
-
-- Start the dev server in another terminal: `npm run dev`
-
-Run tests:
-
-- Open interactive runner: `npm run cy:open`
-- Headless: `npm run cy:run`
-
-Notes:
-
-- FDA requests are stubbed via `cy.intercept` to avoid external network dependency.
 
 ## API Details
 
