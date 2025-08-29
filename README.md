@@ -22,19 +22,19 @@ Source API: https://open.fda.gov/apis/
 
 ## Getting Started
 
-1) Install dependencies
+1. Install dependencies
 
 ```
 npm install
 ```
 
-2) Run the app
+2. Run the app
 
 ```
 npm run dev
 ```
 
-3) Navigate using the header tabs
+3. Navigate using the header tabs
 
 - Counter + Clock → counter with step input and live clock
 - OpenFDA Data → table with text/classification filters
@@ -49,6 +49,8 @@ Hash-based routing is used so the app works on static hosting (e.g., GitHub Page
 - `npm run lint`: run ESLint
 - `npm run test`: run unit tests (Vitest)
 - `npm run test:ui`: interactive test runner
+- `npm run cy:open`: open Cypress runner
+- `npm run cy:run`: run Cypress headless
 
 ## Project Structure
 
@@ -73,6 +75,21 @@ src/
 - Skeletons: while loading, a table-shaped skeleton is shown (no spinners).
 - Table: fixed min-width with horizontal scrolling; long text wraps where appropriate.
 
+## E2E Tests (Cypress)
+
+Prerequisites:
+
+- Start the dev server in another terminal: `npm run dev`
+
+Run tests:
+
+- Open interactive runner: `npm run cy:open`
+- Headless: `npm run cy:run`
+
+Notes:
+
+- FDA requests are stubbed via `cy.intercept` to avoid external network dependency.
+
 ## API Details
 
 - Endpoint: `GET https://api.fda.gov/food/enforcement.json?limit=50`
@@ -80,9 +97,3 @@ src/
   - `product_description:"term" OR reason_for_recall:"term" OR recalling_firm:"term"`
   - `classification:"Class I|II|III"`
 - Docs: https://open.fda.gov/apis/
-
-## Notes & Next Ideas
-
-- Swap HashRouter for BrowserRouter if deploying with server rewrites.
-- Add column sorting and pagination to the FDA table.
-- Add API error boundary UI.

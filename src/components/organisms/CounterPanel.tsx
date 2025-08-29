@@ -14,7 +14,12 @@ export default function CounterPanel() {
 
   return (
     <div className="grid gap-2 max-w-[320px]">
-      <div className="text-3xl font-semibold text-center">{count}</div>
+      <div
+        className="text-3xl font-semibold text-center"
+        data-cy="counter-value"
+      >
+        {count}
+      </div>
       <CounterControls
         onIncrease={() => setCount((c) => c + step)}
         onDecrease={() => setCount((c) => c - step)}
@@ -26,6 +31,9 @@ export default function CounterPanel() {
           inputMode="numeric"
           value={stepInput}
           onChange={(e) => setStepInput(e.target.value)}
+          aria-label="Step amount"
+          data-testid="step-input"
+          data-cy="step-input"
         />
       </LabeledField>
     </div>

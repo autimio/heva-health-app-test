@@ -23,6 +23,7 @@ export default function FilterBar({
         className="min-w-[260px] w-full sm:flex-1"
       />
       <Select
+        aria-label="Classification"
         className="min-w-[180px]"
         value={classification}
         onChange={(e) => onClassificationChange(e.target.value)}
