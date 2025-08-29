@@ -8,15 +8,15 @@ export default function Select({ className = "", children, ...rest }: Props) {
       <select
         {...rest}
         className={
-          `appearance-none pl-3 pr-8 py-2 rounded-md border border-gray-300 bg-white text-gray-900 ` +
-          `focus:outline-none focus:ring-2 focus:ring-indigo-400 ${className}`
+          `appearance-none pl-3 pr-8 py-2 rounded-lg border border-slate-200 bg-white text-slate-900 ` +
+          `shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 ${className}`
         }
       >
         {children}
       </select>
       <svg
         aria-hidden="true"
-        className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500"
+        className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500"
         viewBox="0 0 20 20"
         fill="currentColor"
       >

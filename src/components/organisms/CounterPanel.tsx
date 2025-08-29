@@ -13,7 +13,7 @@ export default function CounterPanel() {
   }, [stepInput]);
 
   return (
-    <div className="grid gap-2 max-w-[320px]">
+    <div className="grid gap-2 max-w-[320px] mx-auto justify-items-center text-center">
       <div
         className="text-3xl font-semibold text-center"
         data-cy="counter-value"

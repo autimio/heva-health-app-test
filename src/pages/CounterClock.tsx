@@ -17,11 +17,15 @@ export default function CounterClock() {
   );
 
   return (
-    <div className="grid gap-4 justify-items-center text-center">
-      <CounterPanel />
-      <div>
-        <div className="text-sm text-gray-600">Current time</div>
-        <div className="tabular text-2xl">{timeString}</div>
+    <div className="grid gap-6 justify-items-center text-center">
+      <div className="bg-white rounded-xl shadow-sm p-6 w-full max-w-md">
+        <div className="grid gap-4">
+          <CounterPanel />
+          <div>
+            <div className="text-sm text-slate-600">Current time</div>
+            <div className="tabular text-2xl">{timeString}</div>
+          </div>
+        </div>
       </div>
     </div>
   );

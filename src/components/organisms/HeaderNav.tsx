@@ -5,10 +5,10 @@ export default function HeaderNav() {
   const [hovered, setHovered] = useState<null | "counter" | "fda">(null);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-white text-gray-900 border-b">
-      <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
-        <h1 className="m-0 text-[20px] font-semibold">Heva Health App Test</h1>
-        <nav className="flex gap-2">
+    <header className="fixed inset-x-0 top-0 z-50 bg-white text-slate-900 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
+        <h1 className="m-0 text-[16px] md:text-[20px] font-semibold tracking-tight">Heva Health App Test</h1>
+        <nav className="flex gap-0.5 md:gap-1">
           <NavLink
             to="/counter"
             onMouseEnter={() => setHovered("counter")}
@@ -17,9 +17,11 @@ export default function HeaderNav() {
             onBlur={() => setHovered((h) => (h === "counter" ? null : h))}
             className={({ isActive }) =>
               [
-                "px-2 py-1 rounded-md transition focus:outline-none focus:ring-2 focus:ring-indigo-400",
-                isActive ? "bg-gray-100" : "",
-                hovered === "counter" ? "bg-gray-100" : "",
+                "px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-xs md:text-sm transition focus:outline-none focus:ring-2 focus:ring-indigo-400",
+                isActive
+                  ? "bg-slate-100 text-slate-900"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
+                hovered === "counter" ? "bg-slate-100" : "",
               ].join(" ")
             }
           >
@@ -33,9 +35,11 @@ export default function HeaderNav() {
             onBlur={() => setHovered((h) => (h === "fda" ? null : h))}
             className={({ isActive }) =>
               [
-                "px-2 py-1 rounded-md transition focus:outline-none focus:ring-2 focus:ring-indigo-400",
-                isActive ? "bg-gray-100" : "",
-                hovered === "fda" ? "bg-gray-100" : "",
+                "px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-xs md:text-sm transition focus:outline-none focus:ring-2 focus:ring-indigo-400",
+                isActive
+                  ? "bg-slate-100 text-slate-900"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
+                hovered === "fda" ? "bg-slate-100" : "",
               ].join(" ")
             }
           >

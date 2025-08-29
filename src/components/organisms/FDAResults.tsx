@@ -16,9 +16,9 @@ export default function FDAResults({ items, loading = false, skeletonRows = 8 }:
 
 function DataTable({ items }: { items: FoodEnforcementRecord[] }) {
   return (
-    <div className="overflow-x-auto rounded-md border border-gray-200">
-      <table className="min-w-[900px] w-full table-auto">
-        <thead className="bg-gray-100">
+    <div className="overflow-x-auto bg-white rounded-xl border border-slate-200 shadow-sm">
+      <table className="min-w-[900px] w-full table-auto text-sm">
+        <thead className="bg-slate-50">
           <tr>
             <Th className="w-28">Recall #</Th>
             <Th className="w-24">Class</Th>
@@ -30,9 +30,9 @@ function DataTable({ items }: { items: FoodEnforcementRecord[] }) {
             <Th className="w-28">Report Date</Th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="divide-y divide-slate-100">
           {items.map((r) => (
-            <tr key={r.recall_number} className="even:bg-gray-50/40 align-top">
+            <tr key={r.recall_number} className="align-top hover:bg-slate-50/60">
               <Td>{r.recall_number}</Td>
               <Td>{r.classification || '-'}</Td>
               <Td className="break-words whitespace-normal">{r.recalling_firm || '-'}</Td>
@@ -45,16 +45,16 @@ function DataTable({ items }: { items: FoodEnforcementRecord[] }) {
           ))}
         </tbody>
       </table>
-      {items.length === 0 && <div className="pt-2 px-3 pb-3">No results.</div>}
+      {items.length === 0 && <div className="pt-3 px-4 pb-4 text-sm text-slate-600">No results.</div>}
     </div>
   )
 }
 
 function SkeletonTable({ rows }: { rows: number }) {
   return (
-    <div className="overflow-x-auto rounded-md border border-gray-200">
-      <table className="min-w-[900px] w-full table-auto">
-        <thead className="bg-gray-100">
+    <div className="overflow-x-auto bg-white rounded-xl border border-slate-200 shadow-sm">
+      <table className="min-w-[900px] w-full table-auto text-sm">
+        <thead className="bg-slate-50">
           <tr>
             <Th className="w-28">Recall #</Th>
             <Th className="w-24">Class</Th>
@@ -66,9 +66,9 @@ function SkeletonTable({ rows }: { rows: number }) {
             <Th className="w-28">Report Date</Th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="divide-y divide-slate-100">
           {Array.from({ length: rows }).map((_, i) => (
-            <tr key={i} className="even:bg-gray-50/40 align-top">
+            <tr key={i} className="align-top">
               <Td><Skeleton className="h-4 w-20" /></Td>
               <Td><Skeleton className="h-4 w-16" /></Td>
               <Td><Skeleton className="h-4 w-40" /></Td>
@@ -89,7 +89,7 @@ function Th({ children, className = '' }: { children: ReactNode; className?: str
   return (
     <th
       scope="col"
-      className={`text-left px-3 py-2 text-xs font-semibold uppercase tracking-wide text-gray-700 border-b-2 border-gray-200 sticky top-0 z-10 whitespace-nowrap ${className}`}
+      className={`text-left px-4 py-3 text-[11px] font-semibold uppercase tracking-wide text-slate-600 border-b border-slate-200 sticky top-0 z-10 whitespace-nowrap ${className}`}
     >
       {children}
     </th>
@@ -97,6 +97,5 @@ function Th({ children, className = '' }: { children: ReactNode; className?: str
 }
 
 function Td({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <td className={`px-3 py-2 border-b border-gray-100 ${className}`}>{children}</td>
+  return <td className={`px-4 py-3 ${className}`}>{children}</td>
 }
-

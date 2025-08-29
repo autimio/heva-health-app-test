@@ -19,7 +19,7 @@ export default function FDAData() {
 
     const controller = new AbortController();
     abortRef.current = controller;
-    const debounceMs = import.meta.env.MODE === 'test' ? 0 : 450;
+    const debounceMs = import.meta.env.MODE === "test" ? 0 : 450;
     setLoading(true);
     setError(null);
 
@@ -66,17 +66,26 @@ export default function FDAData() {
   }, [data, query, classification]);
 
   return (
-    <div className="grid gap-2">
-      <p className="m-0 text-gray-600">
-        Source: <a href="https://open.fda.gov/apis/" target="_blank" rel="noopener noreferrer">open.fda.gov</a>
+    <div className="grid gap-3">
+      <p className="m-0 text-slate-600">
+        Source:{" "}
+        <a
+          href="https://open.fda.gov/apis/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          open.fda.gov
+        </a>
       </p>
 
-      <FilterBar
-        query={query}
-        onQueryChange={setQuery}
-        classification={classification}
-        onClassificationChange={setClassification}
-      />
+      <div className="bg-white rounded-xl shadow-sm p-4">
+        <FilterBar
+          query={query}
+          onQueryChange={setQuery}
+          classification={classification}
+          onClassificationChange={setClassification}
+        />
+      </div>
 
       {error && <div className="text-red-600">Error: {error}</div>}
       <FDAResults loading={loading} items={filtered} skeletonRows={8} />
