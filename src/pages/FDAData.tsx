@@ -19,7 +19,7 @@ export default function FDAData() {
 
     const controller = new AbortController();
     abortRef.current = controller;
-    const debounceMs = 450;
+    const debounceMs = import.meta.env.MODE === 'test' ? 0 : 450;
     setLoading(true);
     setError(null);
 

@@ -47,6 +47,8 @@ Hash-based routing is used so the app works on static hosting (e.g., GitHub Page
 - `npm run build`: type-check and build for production
 - `npm run preview`: preview the production build
 - `npm run lint`: run ESLint
+- `npm run test`: run unit tests (Vitest)
+- `npm run test:ui`: interactive test runner
 
 ## Project Structure
 
@@ -55,11 +57,11 @@ src/
   components/
     atoms/        # Button, Input, Select, Skeleton
     molecules/    # LabeledField, CounterControls, FilterBar
-    organisms/    # CounterPanel, HeaderNav, FDAResultsTable, FDAResultsSkeleton
+    organisms/    # CounterPanel, HeaderNav, FDAResults
     templates/    # AppLayout
   pages/          # CounterClock, FDAData
   services/       # openfda (URL builders)
-  utils/          # date, query
+  utils/          # date
   types/          # openfda API types
 ```
 
@@ -83,4 +85,4 @@ src/
 
 - Swap HashRouter for BrowserRouter if deploying with server rewrites.
 - Add column sorting and pagination to the FDA table.
-- Add unit tests and API error boundary UI.
+- Add API error boundary UI.
